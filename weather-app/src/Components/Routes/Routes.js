@@ -10,7 +10,7 @@ import {
 import PageNotFound from "../Errors/PageNotFound/PageNotFound";
 import WeatherRoot from "../Content/WeatherRoot/WeatherRoot";
 
-function Routes(params  ) {
+const Routes = (params) => {
 
 
   return (

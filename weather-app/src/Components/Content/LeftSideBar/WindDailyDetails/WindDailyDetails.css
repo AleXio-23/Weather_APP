@@ -1,0 +1,121 @@
+
+
+.wind-animation{
+    width: 95px;
+    height: 95px;
+    margin-left: 25px;
+    margin-top: 23px;
+    padding-top: 0;
+    background: url('../../../../Images/bg_qari.png');
+    background-repeat: no-repeat;
+}
+
+.wind-animation .first {
+    background: url('../../../../Images/b1.png');
+    width: 60px;
+    height: 60px;
+    margin-top: -14px;
+    margin-left: -9px;
+}
+
+.wind-animation .last {
+    background: url('../../../../Images/b2.png');
+    width: 34px;
+    height: 34px;
+    margin-top: -32px;
+    margin-left: 21px;
+}
+
+.first {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -moz-animation-name: first;
+    -moz-animation-duration: 0.8s;
+    -webkit-animation-name: first;
+    -webkit-animation-duration: 0.8s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: normal;
+    -moz-animation-delay: 0;
+    -moz-animation-play-state: running;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: normal;
+    -webkit-animation-delay: 0;
+    -webkit-animation-play-state: running;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.last {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -moz-animation-name: first;
+    -moz-animation-duration: 0.4s;
+    -webkit-animation-name: first;
+    -webkit-animation-duration: 0.4s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: normal;
+    -moz-animation-delay: 0;
+    -moz-animation-play-state: running;
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: normal;
+    -webkit-animation-delay: 0;
+    -webkit-animation-play-state: running;
+    -webkit-animation-fill-mode: forwards;
+}
+
+
+
+@keyframes first {
+    0%{
+        
+    transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+.daily-wind{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.area-descr{
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+.wind-det-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.wind-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 10px;
+}
+
+.area-title{
+    font-weight: bold;
+    font-size: 15px;
+}

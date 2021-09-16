@@ -2,7 +2,7 @@
 import { put, takeLatest } from "@redux-saga/core/effects";
 import { GET_CITIES_PENDING } from "../../../Tools/Constants/ModulesConstants";
 import Cities from '../../../Tools/Cities';
-import { GetCities } from "../Action/Index";
+import { GetCities } from "../Action";
 
 
 function* getCitiesAsync(params){

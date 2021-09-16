@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Selector.css';
 
-function Selector() {
+const Selector = () => {
 
   const [dropdownHovered, setDropHover] = useState(false);
   const metrics = [{ value: "C", text: "C°" }, { value: "F", text: "F°" }];

@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 import App from './Components/Root/App';
 import { applyMiddleware, createStore } from 'redux';
 import allReducers from './Modules/allReducers';
-import { watchCities } from './Modules/City/Saga/Index';
+import { saga as citiesSaga } from './Modules/City';
 
 
 
@@ -21,7 +21,7 @@ const store = createStore(allReducers, /* preloadedState, */ composeEnhancers(
   // other store enhancers if any
 ));
 
-sagaMiddleWare.run(watchCities);
+sagaMiddleWare.run(citiesSaga.watchCities);
 
 
 ReactDOM.render(

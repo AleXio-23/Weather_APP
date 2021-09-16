@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetCities } from '../../../Modules/City/Action/Index';
-import { GetLanguage } from '../../../Modules/Language/Action/Index';
+// import { GetCities } from '../../../Modules/City/Action';
+import { action as languageAction } from '../../../Modules/Language';
+import { action as citiesAction } from '../../../Modules/City';
 import './Search.css';
 import LanguagePack from '../../../Tools/Language/LangDictionary';
 import { LANG_GEO } from '../../../Tools/Constants/LanguageConstants';
@@ -33,12 +34,12 @@ const  Search = () => {
   const selectedGlobalLang = getSelectedLang.language;
 
   useEffect(() => {
-    dispatch(GetCities.get(''));
+    dispatch(citiesAction.GetCities.get(''));
   }, []);
 
 
   useEffect(() => {
-    dispatch(GetLanguage.get());
+    dispatch(languageAction.GetLanguage.get());
   }, []);
 
 
@@ -58,10 +59,10 @@ const  Search = () => {
 
   useEffect(() => {
     if (!selectedItem.searchParam) {
-      dispatch(GetCities.get(''));
+      dispatch(citiesAction.GetCities.get(''));
     } else {
 
-      dispatch(GetCities.get(selectedItem.searchParam));
+      dispatch(citiesAction.GetCities.get(selectedItem.searchParam));
     }
 
   }, [selectedItem.searchParam]);

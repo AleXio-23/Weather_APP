@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import citiesReducer from "./City/Reducer/Index";
-import languageReducer from "./Language/Reducer/Index";
+import {reducer as citiesReducer} from "./City";
+import {reducer as languageReducer} from "./Language";
 
 
 
