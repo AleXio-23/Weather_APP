@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetCities } from '../../../Modules/City/Action/Index';
-import { GetLanguage } from '../../../Modules/Language/Action/Index';
+import { action as languageAction } from '../../../Modules/Language';
 import { LANG_ENG, LANG_GEO } from '../../../Tools/Constants/LanguageConstants';
 import './Language.css';
 
-function Language() {
+const Language = () => {
 
 
     // const metrics = [{ value: LANG_GEO, text: LANG_GEO }, { value: LANG_ENG, text: LANG_ENG }];
@@ -19,7 +18,7 @@ function Language() {
     const [selectedLang, setSelectedLang] = useState(selectedGlobalLang);
 
     useEffect(() => {
-        dispatch(GetLanguage.get());
+        dispatch(languageAction.GetLanguage.get());
         setSelectedLang(selectedGlobalLang);
     }, []);
 
@@ -36,8 +35,7 @@ function Language() {
 
     const optionClickEvent = (value) => {
         setDropHover(false);
-        console.log("* " + value +" *");
-        dispatch(GetLanguage.set(value));
+        dispatch(languageAction.GetLanguage.set(value));
     }
 
 

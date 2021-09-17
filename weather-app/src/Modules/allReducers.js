@@ -1,12 +1,19 @@
 import { combineReducers } from "redux";
-import citiesReducer from "./City/Reducer/Index";
-import languageReducer from "./Language/Reducer/Index";
+import {reducer as citiesReducer} from "./City";
+import {reducer as languageReducer} from "./Language";
+import {reducer as unitsReducer} from "./Unit"
+import  {reducer as currentWeatherReducer} from "./CurrentWeather";
+import { reducer as SelectedCityReducer } from "./SelectedCity";
+import selectedCItyReducer from "./SelectedCity/Reducer";
 
 
 
 const allReducers = combineReducers({
     cities: citiesReducer,
-    languages: languageReducer
+    languages: languageReducer,
+    units: unitsReducer,
+    currentWeather: currentWeatherReducer,
+    selectedCity: selectedCItyReducer
 });
 
 

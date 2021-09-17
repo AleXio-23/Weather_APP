@@ -1,32 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Selector.css';
+import {action as unitAction} from '../../../Modules/Unit';
+import { UNIT_CELSIUS, UNIT_FARENHEIT } from '../../../Tools/Constants/ModulesConstants';
 
-function Selector() {
+const Selector = () => {
+
+
+  const dispatch = useDispatch();
+  const getUnit = useSelector(state => state.units);
+  const selectedUnit = getUnit.unit;
 
   const [dropdownHovered, setDropHover] = useState(false);
-  const metrics = [{ value: "C", text: "C°" }, { value: "F", text: "F°" }];
-  const [selectedMetric, setMetric] = useState(metrics[0]);
+  
+  const [selectedMetric, setMetric] = useState(selectedUnit);
+
+  useEffect(()=> {
+    dispatch(unitAction.getUnit.get());
+    setMetric(selectedUnit);
+  }, []);
+
+  useEffect(() => {
+    setMetric(selectedUnit)
+  }, [selectedUnit]);
 
   const onMouseEvent = () => {
     setDropHover(true);
   }
 
   const optionClickEvent = (value) => {
-    setMetric(value);
+    dispatch(unitAction.getUnit.set(value));
     setDropHover(false);
   } 
+
+  const getUnitAnalog = (unit) => {
+    return unit === UNIT_CELSIUS ? 'C°' : (unit === UNIT_FARENHEIT? 'F°' : '');
+      
+  }
 
   return (
     <div className="selector"  onMouseOver={() => onMouseEvent()} onMouseLeave={() => setDropHover(false)}>
       <div className={`selected-area  ${dropdownHovered? 'border-rad-out' : 'border-rad-in'}`}>
-        <span className="selected-value">{selectedMetric.text}</span>
+        <span className="selected-value">{getUnitAnalog(selectedMetric)}</span>
         <span className="arrow"><div className={`arrow-up ${dropdownHovered ? 'rotate-arrow' : ''} `}></div></span>
       </div>
 
       <div className={`options-area ${dropdownHovered ? 'sl-visible': 'sl-InVisible'}  `}>
-        {metrics.map(m =>
-           <div className="option" key={m.value} onClick={() => optionClickEvent(m)}>{m.text}</div>
-        )}
+        
+          <div className="option" onClick={() => optionClickEvent(UNIT_CELSIUS)}>C°</div>
+          <div className="option" onClick={() => optionClickEvent(UNIT_FARENHEIT)}>F°</div>
+        
       </div>
     </div>
   );
