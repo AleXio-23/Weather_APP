@@ -1,6 +1,4 @@
-import { LANG_ENG, LANG_GEO, SET_GLOBAL_LANGUAGE, GET_GLOBAL_LANGUAGE } from '../../../Tools/Constants/LanguageConstants';
-
-
+import { UNIT_CELSIUS, UNIT_PENDING, UNIT_SUCCESS } from "../../../Tools/Constants/ModulesConstants"
 
 
 const initialState = {
@@ -8,13 +6,14 @@ const initialState = {
         isPending: false,
         isSuccessed: false
     },
-    language: LANG_ENG
+    unit: UNIT_CELSIUS
 }
 
 
-const languageReducer = (state = initialState, action) => {
+
+const metricReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_GLOBAL_LANGUAGE:
+        case UNIT_PENDING:
             return {
                 ...state,
                 statuses: {
@@ -23,7 +22,7 @@ const languageReducer = (state = initialState, action) => {
                     isSuccessed: false
                 }
             }
-        case SET_GLOBAL_LANGUAGE:
+        case UNIT_SUCCESS:
             return {
                 ...state,
                 statuses: {
@@ -31,12 +30,12 @@ const languageReducer = (state = initialState, action) => {
                     isPending: false,
                     isSuccessed: true
                 },
-                language: action.payload
+                unit: action.payload
             }
-
         default:
             return { ...state }
     }
 }
 
-export default languageReducer;
+
+export default metricReducer;

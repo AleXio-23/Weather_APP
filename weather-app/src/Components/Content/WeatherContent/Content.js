@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ContentArea from '../ContentArea/ContentArea';
 import Language from '../LanguageSelector/Language';
 import LeftSideBar from '../LeftSideBar/LeftSideBar';
 import Selector from '../MetricSelector/Selector';
@@ -7,10 +8,7 @@ import './Content.css';
 
 const Content = () => {
 
-
-    const selectOptions = [{ key: "C", value: "C" }, { key: "F", value: "F" }]
-
-    const [selectedMetric, setMetric] = useState(selectOptions[0]);
+    
 
 
     return (
@@ -36,7 +34,8 @@ const Content = () => {
 
 
                 <div className="content-area">
-                    Content
+                    
+                    <ContentArea/>
                 </div>
             </div>
         </div>

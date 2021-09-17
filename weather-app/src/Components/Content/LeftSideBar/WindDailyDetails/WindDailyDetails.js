@@ -3,11 +3,11 @@
 import './WindDailyDetails.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { action as languageAction } from '../../../../Modules/Language';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LanguagePack from '../../../../Tools/Language/LangDictionary';
 import { LANG_GEO } from '../../../../Tools/Constants/LanguageConstants';
 
-const  WindDailyDetails = () => {
+const WindDailyDetails = () => {
     const dispatch = useDispatch();
 
     const getSelectedLang = useSelector(state => state.languages);
@@ -17,6 +17,15 @@ const  WindDailyDetails = () => {
     useEffect(() => {
         dispatch(languageAction.GetLanguage.get());
     }, []);
+
+    
+    const currentWeatherData = useSelector(state => state.currentWeather);
+    const getCurrentWeather = currentWeatherData.data;
+    const [weatherState, setWeatherSate] = useState({});
+    
+    useEffect(() => {
+        setWeatherSate(getCurrentWeather);
+    }, [getCurrentWeather]);
 
     const getLanguageText = (fiendName) => {
         var getDataField = LanguagePack.find(x => x.name === fiendName);
@@ -41,11 +50,11 @@ const  WindDailyDetails = () => {
                 <div className="area-descr">
                     <div className="wind-det-line ">
                         <div className="wind-det-desc " value="speend">{getLanguageText('speed')}</div>
-                        <div className="wind-det-val">13.89  {getLanguageText('kmh_metric')}</div>
-                    </div> 
+                        <div className="wind-det-val">{weatherState?.wind?.speed}  {getLanguageText('kmh_metric')}</div>
+                    </div>
                     <div className="wind-det-line ">
                         <div className="wind-det-desc" value="pressure">{getLanguageText('pressure')}</div>
-                        <div className="wind-det-val">1009</div>
+                        <div className="wind-det-val">{weatherState?.main?.pressure}</div>
                     </div>
 
 

@@ -35,7 +35,6 @@ const Language = () => {
 
     const optionClickEvent = (value) => {
         setDropHover(false);
-        console.log("* " + value +" *");
         dispatch(languageAction.GetLanguage.set(value));
     }
 

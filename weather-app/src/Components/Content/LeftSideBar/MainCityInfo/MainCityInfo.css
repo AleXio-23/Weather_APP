@@ -12,7 +12,8 @@
 }
 
 .current-date, .current-time{
-    font-size: 11px;
+    font-size: 13px;
+    margin-top: 5px;
 }
 
 .current-weather-inf{

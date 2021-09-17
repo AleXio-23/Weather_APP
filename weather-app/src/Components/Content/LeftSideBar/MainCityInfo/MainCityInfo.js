@@ -3,11 +3,11 @@ import './MainCityInfo.css';
 import DateDictPack from '../../../../Tools/Language/DateDictionary';
 import { useDispatch, useSelector } from 'react-redux';
 import { action as languageAction } from '../../../../Modules/Language';
+import LangDictionary from '../../../../Tools/Language/LangDictionary';
 import { LANG_GEO } from '../../../../Tools/Constants/LanguageConstants';
 
 const MainCityInfo = () => {
 
-    const iconUrl= "http://openweathermap.org/img/wn/10d@2x.png";
 
     const dispatch = useDispatch();
 
@@ -15,9 +15,29 @@ const MainCityInfo = () => {
     const selectedGlobalLang = getSelectedLang.language;
 
 
+    const currentWeatherData = useSelector(state => state.currentWeather);
+    const getCurrentWeather = currentWeatherData.data;
+
+    const selectedCity = useSelector(state => state.selectedCity);
+    const getSelectedCity = selectedCity.data;
+
+    const [weatherState, setWeatherSate] = useState({});
+    
+    useEffect(() => {
+        setWeatherSate(getCurrentWeather);
+    }, [getCurrentWeather]);
+
     useEffect(() => {
         dispatch(languageAction.GetLanguage.get());
     }, []);
+
+    
+
+    const getWeatherIcon = (param) => {
+        return `http://openweathermap.org/img/wn/${param}.png`;
+    }
+
+
 
 
 
@@ -26,15 +46,9 @@ const MainCityInfo = () => {
     const [weekDay, setWeekDay] = useState(today.getDay());
     const [month, setMonth] = useState(today.getMonth());
     const [date, setDate] = useState(today.getDate());
-    const [hours, setHours]= useState(today.getHours());
+    const [hours, setHours] = useState(today.getHours());
     const [minutes, setMinutes] = useState(today.getMinutes());
     const [seconds, setSeconds] = useState(today.getSeconds());
-
-
-
-    console.log(today.getDay());
-    console.log(today.getMonth());
-    console.log(today.getDate());
 
 
     useEffect(() => {
@@ -48,31 +62,43 @@ const MainCityInfo = () => {
 
     const getDateAlt = (type, num) => {
 
-        var getDt =  DateDictPack.find(x => x.type === type);
+        var getDt = DateDictPack.find(x => x.type === type);
         var find = getDt.data.find(x => x.num === num);
 
         return (selectedGlobalLang === LANG_GEO)
             ? find.name_ka
             : find.name_en
-        
+
     }
-    
+
+    const getLanguageText = (fiendName) => {
+        var getDataField = LangDictionary.find(x => x.name === fiendName);
+
+        if(!getDataField) {
+            return (fiendName);
+        }
+
+        return selectedGlobalLang === LANG_GEO
+            ? getDataField.name_ka
+            : getDataField.name_en
+    }
+
 
     return (
         <div className="main-info">
-            <div className="citi-name">თბილისი</div>
+            <div className="citi-name">{selectedGlobalLang === LANG_GEO ? getSelectedCity.name_ka : getSelectedCity.name_en}</div>
             <div className="current-date">{getDateAlt("week", weekDay)}, {date} {getDateAlt("month", month)}</div>
             <div className="current-time">{hours}:{minutes}:{seconds}</div>
             <div className="current-weather-inf">
                 <div className="cur-weather-icon">
-                    <img src={iconUrl} alt="weather_icon"/>
+                    <img src={weatherState.weather ? getWeatherIcon(weatherState.weather[0].icon) : null} alt="weather_icon" />
                 </div>
                 <div className="cur-weather-temp">
-                    <span>21°</span>
+                    <span>{weatherState?.main?.temp.toFixed(1)}°</span>
                 </div>
             </div>
             <div className="cur-weather-descrip">
-                <span>ნაწილობრივ წვიმიანი</span>
+                <span>{weatherState.weather ? getLanguageText(weatherState.weather[0].description): null}</span>
             </div>
         </div>
     );

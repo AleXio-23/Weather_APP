@@ -31,6 +31,7 @@
     color: white;
     display: flex;
     align-items: center;
+    font-size: 13px;
 }
 
 .options-area{
@@ -97,6 +98,7 @@
     padding-left: 10px;
     box-sizing: border-box;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .arrow{
