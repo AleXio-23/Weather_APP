@@ -98,6 +98,10 @@ const DailyForecast = () => {
         return state;
     }
 
+    
+  const selectedUnitDt = useSelector(state => state.units);
+  const selectedUnit = selectedUnitDt.unit;
+
     useEffect(() => {
         let crDt = new Date();
         const eachDayDy = [];
@@ -138,7 +142,7 @@ const DailyForecast = () => {
         );
         
         setDailyWeatherDtState(eachDayDy);
-    }, [dailyWeatherDt, selectedGlobalLang])
+    }, [dailyWeatherDt, selectedGlobalLang, selectedUnit]);
 
 
     return (
@@ -148,12 +152,17 @@ const DailyForecast = () => {
                     <div className="fc-day">{wdt?.wt_date?.weekday}</div>
                     <div className="fc-date">{wdt?.wt_date?.full_date}</div>
                     <div className="fc-icon">
+                        {
+                            wdt?.min_max?.temp_min < 1000? 
+                                
                         <img src={getWeatherIcon(wdt?.min_max?.w_icon)} alt="icon" title={getLanguageText(wdt?.min_max?.w_descrip)} />
+                        : <span className="error-message">Data not found</span>
+                        }
                     </div>
                     <div className="fc-temp-range">
-                        <div className="fc-temp-min">{wdt?.min_max?.temp_min?.toFixed(1)}°</div>
+                        <div className="fc-temp-min">{wdt?.min_max?.temp_min < 1000? wdt?.min_max?.temp_min?.toFixed(1) : '--'}°</div>
                         -
-                        <div className="fc-temp-max">{wdt?.min_max?.temp_max?.toFixed(1)}°</div>
+                        <div className="fc-temp-max">{wdt?.min_max?.temp_min < 1000? wdt?.min_max?.temp_max?.toFixed(1) : '--'}°</div>
                     </div>
                 </div>
             )}

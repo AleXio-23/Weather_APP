@@ -31,9 +31,13 @@ const DailyDetails = () => {
     const getCurrentWeather = currentWeatherData.data;
     const [weatherState, setWeatherSate] = useState({});
     
+  const selectedUnitDt = useSelector(state => state.units);
+  const selectedUnit = selectedUnitDt.unit;
+
+    
     useEffect(() => {
         setWeatherSate(getCurrentWeather.main);
-    }, [getCurrentWeather]);
+    }, [getCurrentWeather, selectedUnit]);
 
     return (
         <div className="daily-details">

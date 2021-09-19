@@ -23,11 +23,11 @@ const WindDailyDetails = () => {
 
 
     useEffect(() => {
-        if(selectedUnit === UNIT_CELSIUS) {setUnitState(getLanguageText('kmh_metric'))}
-        if(selectedUnit === UNIT_FARENHEIT) {setUnitState(getLanguageText('mph_metric'))}
+        if (selectedUnit === UNIT_CELSIUS) { setUnitState(getLanguageText('kmh_metric')) }
+        if (selectedUnit === UNIT_FARENHEIT) { setUnitState(getLanguageText('mph_metric')) }
     }, [selectedUnit, selectedGlobalLang])
 
- 
+
 
     useEffect(() => {
         dispatch(languageAction.GetLanguage.get());

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './MainCityInfo.css';
 import DateDictPack from '../../../../Tools/Language/DateDictionary';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,43 +22,18 @@ const MainCityInfo = () => {
     const getSelectedCity = selectedCity.data;
 
     const [weatherState, setWeatherSate] = useState({});
+    
+  const selectedUnitDt = useSelector(state => state.units);
+  const selectedUnit = selectedUnitDt.unit;
+
 
     useEffect(() => {
         setWeatherSate(getCurrentWeather);
-    }, [getCurrentWeather]);
+    }, [getCurrentWeather, selectedUnit]);
 
     useEffect(() => {
         dispatch(languageAction.GetLanguage.get());
     }, []);
-
-
-
-    const getWeatherIcon = (param) => {
-        return `http://openweathermap.org/img/wn/${param}.png`;
-    }
-
-
-
-
-
-    const today = new Date();
-
-    const [weekDay, setWeekDay] = useState(today.getDay());
-    const [month, setMonth] = useState(today.getMonth());
-    const [date, setDate] = useState(today.getDate());
-    const [hours, setHours] = useState(today.getHours());
-    const [minutes, setMinutes] = useState(today.getMinutes());
-    const [seconds, setSeconds] = useState(today.getSeconds());
-  
-    
-    useEffect(() => {
-        setWeekDay(today.getDay());
-        setMonth(today.getMonth());
-        setDate(today.getDate());
-        setHours(today.getHours());
-        setMinutes(today.getMinutes());
-        setSeconds(today.getSeconds());
-    }, [today]);
 
     const getDateAlt = (type, num) => {
 
@@ -70,6 +45,45 @@ const MainCityInfo = () => {
             : find.name_en
 
     }
+
+
+    const getWeatherIcon = (param) => {
+        return `http://openweathermap.org/img/wn/${param}.png`;
+    }
+
+
+    const [currentDate, setCurrentDate] = useState({
+        weekDay: getDateAlt("week", new Date().getDay()),
+        month: getDateAlt("month", new Date().getMonth()),
+        date: new Date().getDate(),
+        hours: new Date().getHours(),
+        minutes: new Date().getMinutes(),
+        seconds: new Date().getSeconds()
+
+    });
+
+
+    const interval = useRef(null)
+    const startCounter = () => interval.current = setInterval(() => {
+        setCurrentDate({
+            weekDay: getDateAlt("week", new Date().getDay()),
+            month: getDateAlt("month", new Date().getMonth()),
+            date: new Date().getDate(),
+            hours: new Date().getHours(),
+            minutes: new Date().getMinutes(),
+            seconds: new Date().getSeconds()
+    
+        }); 
+    }, 1000)
+    const stopCounter = () => clearInterval(interval.current)
+
+    
+
+    useEffect(() => {
+        startCounter();
+        return () => stopCounter()
+    }, [currentDate])
+
 
     const getLanguageText = (fiendName) => {
         var getDataField = LangDictionary.find(x => x.name === fiendName);
@@ -87,8 +101,8 @@ const MainCityInfo = () => {
     return (
         <div className="main-info">
             <div className="citi-name">{selectedGlobalLang === LANG_GEO ? getSelectedCity.name_ka : getSelectedCity.name_en}</div>
-            <div className="current-date">{getDateAlt("week", weekDay)}, {date} {getDateAlt("month", month)}</div>
-            <div className="current-time">{hours}:{minutes}:{seconds}</div>
+            <div className="current-date">{currentDate.weekDay}, {currentDate.date} {currentDate.month}</div>
+            <div className="current-time">{currentDate.hours}:{currentDate.minutes}:{currentDate.seconds}</div>
             <div className="current-weather-inf">
                 <div className="cur-weather-icon">
                     <img src={weatherState.weather ? getWeatherIcon(weatherState.weather[0].icon) : null} alt="weather_icon" />

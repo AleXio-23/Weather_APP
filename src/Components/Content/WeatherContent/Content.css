@@ -6,10 +6,14 @@
     flex-direction: row;
 }
 
+
+
+
 .left-side{
     height: 100%;
     width: 300px;
 }
+
 
 .right-side{
     width: 100%;
@@ -50,3 +54,5 @@
     width: 60px;
     margin-right: 5px;
 }
+
+

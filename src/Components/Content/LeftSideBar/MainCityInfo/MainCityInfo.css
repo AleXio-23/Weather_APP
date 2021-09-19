@@ -1,6 +1,7 @@
 
 
 .main-info{
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -44,3 +45,5 @@
     align-items: center;
     font-size: 15px;
 }
+
+

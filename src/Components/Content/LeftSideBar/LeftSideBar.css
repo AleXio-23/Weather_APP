@@ -4,8 +4,20 @@
     color: white;
     display: flex;
     flex-direction: column;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
 .main-city-info{
     margin-bottom: 15px;
 }
+
+
+.sidebar-top, .sidebar-bottom{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+
+

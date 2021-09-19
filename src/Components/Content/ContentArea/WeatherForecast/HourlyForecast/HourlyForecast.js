@@ -69,6 +69,10 @@ const HourlyForecast = () => {
 
 
     const [hourlyWeatherDtState, setHourlyWeatherDtState] = useState([]);
+    
+  const selectedUnitDt = useSelector(state => state.units);
+  const selectedUnit = selectedUnitDt.unit;
+
 
     useEffect(() => {
 
@@ -80,8 +84,8 @@ const HourlyForecast = () => {
         });
 
         setHourlyWeatherDtState(tomorrowWeather);
-        
-    }, [dailyWeatherDt, selectedGlobalLang])
+         
+    }, [dailyWeatherDt, selectedGlobalLang, selectedUnit])
 
 
     const getWeatherIcon = (param) => {
