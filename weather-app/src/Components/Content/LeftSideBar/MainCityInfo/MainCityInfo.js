@@ -22,7 +22,7 @@ const MainCityInfo = () => {
     const getSelectedCity = selectedCity.data;
 
     const [weatherState, setWeatherSate] = useState({});
-    
+
     useEffect(() => {
         setWeatherSate(getCurrentWeather);
     }, [getCurrentWeather]);
@@ -31,7 +31,7 @@ const MainCityInfo = () => {
         dispatch(languageAction.GetLanguage.get());
     }, []);
 
-    
+
 
     const getWeatherIcon = (param) => {
         return `http://openweathermap.org/img/wn/${param}.png`;
@@ -49,8 +49,8 @@ const MainCityInfo = () => {
     const [hours, setHours] = useState(today.getHours());
     const [minutes, setMinutes] = useState(today.getMinutes());
     const [seconds, setSeconds] = useState(today.getSeconds());
-
-
+  
+    
     useEffect(() => {
         setWeekDay(today.getDay());
         setMonth(today.getMonth());
@@ -74,7 +74,7 @@ const MainCityInfo = () => {
     const getLanguageText = (fiendName) => {
         var getDataField = LangDictionary.find(x => x.name === fiendName);
 
-        if(!getDataField) {
+        if (!getDataField) {
             return (fiendName);
         }
 
@@ -98,7 +98,7 @@ const MainCityInfo = () => {
                 </div>
             </div>
             <div className="cur-weather-descrip">
-                <span>{weatherState.weather ? getLanguageText(weatherState.weather[0].description): null}</span>
+                <span>{weatherState.weather ? getLanguageText(weatherState.weather[0].description) : null}</span>
             </div>
         </div>
     );

@@ -9,7 +9,8 @@ import App from './Components/Root/App';
 import { applyMiddleware, createStore } from 'redux';
 import allReducers from './Modules/allReducers';
 import { saga as citiesSaga } from './Modules/City';
-import { saga as currentweatherSaga } from './Modules/CurrentWeather'
+import { saga as currentweatherSaga } from './Modules/CurrentWeather';
+import { saga as dailyWeatherSaga } from './Modules/DailyWeather';
 
 
 const sagaMiddleWare = createSagaMiddleware();
@@ -23,6 +24,7 @@ const store = createStore(allReducers, /* preloadedState, */ composeEnhancers(
 
 sagaMiddleWare.run(citiesSaga.watchCities);
 sagaMiddleWare.run(currentweatherSaga.watchCurrentWeather);
+sagaMiddleWare.run(dailyWeatherSaga.watchDailyWeather);
 
 
 ReactDOM.render(

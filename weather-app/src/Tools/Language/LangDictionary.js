@@ -45,6 +45,11 @@ export default [
         name_ka: "კმ/სთ"
     },
     {
+        name: "mph_metric",
+        name_en: "mph",
+        name_ka: "მლ/სთ"
+    },
+    {
         name: "weahter_hourly",
         name_en: "Hourly",
         name_ka: "საათების მიხედვით"
@@ -58,6 +63,11 @@ export default [
         name: "weather_daily_title",
         name_en: "Daily weather",
         name_ka: "ამინდი დღეების მიხედვით"
+    },
+    {
+        name: "weather_hourly_title",
+        name_en: "Next Day Hourly weather",
+        name_ka: "მომდევნო დღის ამინდი საათების მიხედვით"
     },
     {
         name: "Clouds",

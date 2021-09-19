@@ -3,23 +3,31 @@ import './WeatherForecast.css'
 
 import { action as languageAction } from '../../../../Modules/Language';
 import { LANG_GEO } from '../../../../Tools/Constants/LanguageConstants';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LanguagePack from '../../../../Tools/Language/LangDictionary';
+import DateDictPack from '../../../../Tools/Language/DateDictionary';
+import DailyForecast from './DailyForecast/DailyForecast';
+import HourlyForecast from './HourlyForecast/HourlyForecast';
 
 
 const WeatherForecast = () => {
-    const iconUrl = "http://openweathermap.org/img/wn/10d@2x.png";
+  
+    
 
+    const forecastStatus = {
+        isHourlyActive: false,
+        isDailyActive: true
+    }
 
-    const dispatch = useDispatch();
+    const [forecastState, setForecastState] = useState(forecastStatus);
+
     const getSelectedLang = useSelector(state => state.languages);
     const selectedGlobalLang = getSelectedLang.language;
 
 
-    useEffect(() => {
-        dispatch(languageAction.GetLanguage.get());
-    }, []);
-
+    const forecastStateChangeListener = (state) => {
+        setForecastState(state);
+    }
     const getLanguageText = (fiendName) => {
         var getDataField = LanguagePack.find(x => x.name === fiendName);
 
@@ -29,102 +37,30 @@ const WeatherForecast = () => {
     }
 
 
+
     return (
         <div className="weather-forecast">
             <div className="forecast-header">
-                <div className="header-btn">{getLanguageText("weahter_hourly")}</div>
-                <div className="header-btn header-btn-active">5 {getLanguageText("weather_daily")}</div>
+                <div className={`header-btn ${forecastState.isHourlyActive ? 'header-btn-active' : ''}`} onClick={() => forecastStateChangeListener({ isHourlyActive: true, isDailyActive: false })}>{getLanguageText("weahter_hourly")}</div>
+                <div className={`header-btn ${forecastState.isDailyActive ? 'header-btn-active' : ''}`} onClick={() => forecastStateChangeListener({ isHourlyActive: false, isDailyActive: true })}>5 {getLanguageText("weather_daily")}</div>
 
             </div>
             <div className="forecast-body">
                 <div className="forecast-body-title">
-                    {getLanguageText('weather_daily_title')}
+                    {forecastState.isHourlyActive
+                        ? getLanguageText('weather_hourly_title')
+                        : (forecastState.isDailyActive
+                            ? getLanguageText('weather_daily_title') : '')}
                 </div>
-                <div className="forecast-content">
-
-                    <div className="single-forecast">
-                        <div className="fc-day">ორშაბათი</div>
-                        <div className="fc-date">16 სექტემბერი</div>
-                        <div className="fc-icon">
-                            <img src={iconUrl} alt="icon" />
-                        </div>
-                        <div className="fc-temp-range">
-                            <div className="fc-temp-min">23°</div>
-                            <div className="fc-temp-max">25°</div>
-                        </div>
-                    </div>
-
-
-                    <div className="single-forecast">
-                        <div className="fc-day">ორშაბათი</div>
-                        <div className="fc-date">16 სექტემბერი</div>
-                        <div className="fc-icon">
-                            <img src={iconUrl} alt="icon" />
-                        </div>
-                        <div className="fc-temp-range">
-                            <div className="fc-temp-min">23°</div>
-                            <div className="fc-temp-max">25°</div>
-                        </div>
-                    </div>
-
-                    <div className="single-forecast">
-                        <div className="fc-day">ორშაბათი</div>
-                        <div className="fc-date">16 სექტემბერი</div>
-                        <div className="fc-icon">
-                            <img src={iconUrl} alt="icon" />
-                        </div>
-                        <div className="fc-temp-range">
-                            <div className="fc-temp-min">23°</div>
-                            <div className="fc-temp-max">25°</div>
-                        </div>
-                    </div>
-
-
-                    <div className="single-forecast">
-                        <div className="fc-day">ორშაბათი</div>
-                        <div className="fc-date">16 სექტემბერი</div>
-                        <div className="fc-icon">
-                            <img src={iconUrl} alt="icon" />
-                        </div>
-                        <div className="fc-temp-range">
-                            <div className="fc-temp-min">23°</div>
-                            <div className="fc-temp-max">25°</div>
-                        </div>
-                    </div>
-
-                    <div className="single-forecast">
-                        <div className="fc-day">ორშაბათი</div>
-                        <div className="fc-date">16 სექტემბერი</div>
-                        <div className="fc-icon">
-                            <img src={iconUrl} alt="icon" />
-                        </div>
-                        <div className="fc-temp-range">
-                            <div className="fc-temp-min">23°</div>
-                            <div className="fc-temp-max">25°</div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
+                {forecastState.isDailyActive ?
+                    <div className="forecast-content">
+                        <DailyForecast />
+                    </div> :
+                    (forecastState.isHourlyActive ? 
+                    <div className="forecast-content">
+                        <HourlyForecast/>
+                    </div> : '')
+                }
 
             </div>
         </div>

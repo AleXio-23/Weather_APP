@@ -4,6 +4,7 @@ import Content from '../WeatherContent/Content';
 import './WeatherRoot.css';
 import { action as currentWeatherAction } from '../../../Modules/CurrentWeather'
 import { action as selectedCityAction } from '../../../Modules/SelectedCity';
+import {action as dailyWeatherAction } from '../../../Modules/DailyWeather';
 
 const WeatherRoot = () => {
 
@@ -22,14 +23,23 @@ const WeatherRoot = () => {
     dispatch(selectedCityAction.getSelectedCity.get());
   }, []);
 
-
-
   useEffect(() => {
     if (selectedCity) {
       dispatch(currentWeatherAction.currentWeatherAction.get(selectedCity.name, selectedUnit, 'ee2dd3abfe97c737e66bb317e03892b0'));
     }
 
   }, [selectedCity, selectedUnit]);
+
+
+
+  useEffect(()=> {
+    if (selectedCity) {
+      dispatch(dailyWeatherAction.getDailyWeather.get(selectedCity.name, selectedUnit, 'ee2dd3abfe97c737e66bb317e03892b0'));
+    }
+
+  }, [selectedCity, selectedUnit]);
+
+  
 
 
   return (
