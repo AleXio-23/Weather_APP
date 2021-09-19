@@ -1,0 +1,29 @@
+.daily-details{
+    width: 100%;
+    background-color: rgb(15, 73, 114, .2);
+    display: flex;
+    flex-direction: column;
+}
+
+.det-line{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 5px;
+    border-bottom: 1px solid rgba(173, 173, 173, 0.1);
+}
+
+
+.font-size-geo{
+    font-size: 12px;
+}
+
+.font-size-eng{
+    font-size: 14px;
+}
+
+.det-val{
+    font-size: 14px;
+}
+

@@ -1,0 +1,27 @@
+.hourly-forecast {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:  wrap;
+}
+
+.hourly-forecast>* {
+    flex: 1 0 25%;
+}
+
+
+
+
+.fc-time{
+    font-weight: bold;
+    font-size: 20px;
+}
+.fc-date{
+    font-size: 12px;
+}
+
+.hourly-forecast .fc-temp-range{
+    width: 90px;
+}

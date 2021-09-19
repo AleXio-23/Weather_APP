@@ -1,0 +1,25 @@
+.daily-forecast {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+
+
+.error-message{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center  ;
+    justify-self: center;
+    text-align: center;
+}
+
+.daily-forecast .single-forecast{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
